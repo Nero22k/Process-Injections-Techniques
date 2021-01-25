@@ -81,9 +81,9 @@ int InjectCTX(int pid, HANDLE hProc, unsigned char * payload, unsigned int paylo
 	ctx.ContextFlags = CONTEXT_FULL;
 	GetThreadContext(hThread, &ctx);
 #ifdef _M_IX86 
-	ctx.Eip = (DWORD_PTR) pRemoteCode;
+	ctx.Eip = (DWORD_PTR) pRemoteCode; //x86
 #else
-	ctx.Rip = (DWORD_PTR) pRemoteCode;
+	ctx.Rip = (DWORD_PTR) pRemoteCode; //x64
 #endif
 	SetThreadContext(hThread, &ctx);
 	
