@@ -4,9 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <tlhelp32.h>
-#include <wincrypt.h>
-#pragma comment (lib, "crypt32.lib")
-#pragma comment (lib, "advapi32")
 
 typedef FARPROC (WINAPI * RtlCreateUserThread_t)(
 	IN HANDLE ProcessHandle,
