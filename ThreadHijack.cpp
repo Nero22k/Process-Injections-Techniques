@@ -13,17 +13,22 @@ int FindTarget(const char *procname) {
         HANDLE hProcSnap;
         PROCESSENTRY32 pe32;
         int pid = 0;
-                
+	
+        //Take a snapshot of all processes in the system.        
         hProcSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
         if (INVALID_HANDLE_VALUE == hProcSnap) return 0;
-                
-        pe32.dwSize = sizeof(PROCESSENTRY32); 
-                
+	
+        // Set the size of the structure before using it        
+        pe32.dwSize = sizeof(PROCESSENTRY32);
+	
+        // Retrieve information about the first process,
+  	// and exit if unsuccessful        
         if (!Process32First(hProcSnap, &pe32)) {
                 CloseHandle(hProcSnap);
                 return 0;
         }
-                
+        
+	// Loops through the process list and looks for maching string.
         while (Process32Next(hProcSnap, &pe32)) {
                 if (lstrcmpiA(procname, pe32.szExeFile) == 0) {
                         pid = pe32.th32ProcessID;
@@ -32,7 +37,8 @@ int FindTarget(const char *procname) {
         }
                 
         CloseHandle(hProcSnap);
-                
+        
+	//Returns the pid of target process.
         return pid;
 }
 
@@ -41,10 +47,12 @@ HANDLE FindThread(int pid){
 
 	HANDLE hThread = NULL;
 	THREADENTRY32 thEntry;
-
+	
+	//Snapshot the threads of target process
 	thEntry.dwSize = sizeof(thEntry);
-    HANDLE Snap = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
-		
+    	HANDLE Snap = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
+	
+	//Finds the first thread in the target process and uses it for injection.
 	while (Thread32Next(Snap, &thEntry)) {
 		if (thEntry.th32OwnerProcessID == pid) 	{
 			hThread = OpenThread(THREAD_ALL_ACCESS, FALSE, thEntry.th32ThreadID);
@@ -53,6 +61,7 @@ HANDLE FindThread(int pid){
 	}
 	CloseHandle(Snap);
 	
+	//Returns the handle to the thread.
 	return hThread;
 }
 
