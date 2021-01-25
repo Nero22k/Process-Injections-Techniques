@@ -1,6 +1,6 @@
 # Different Process Injections Implemented In C++
 
-**[Basic Process Injection which is very common now days]**
+**[Basic process injection, detected by most EDP and anti-virus software]**
 * Classic (CreateRemoteThread):
   * OpenProcess/CreateProcess: Get a handle to a running or newly created process.
   * VirtualAllocEx: Allocate memory in the remote process.
