@@ -20,7 +20,7 @@
   * SetThreadContext: Update instruction point for thread to shellcode.
   * ResumeThread: Resume the hijacked thread.
 
-**[MapView process injection, shares a section view with a target process then spawns new thread and executes the payload inside process]**
+**[MapView process injection, shares a section view with a target process then spawns new thread and executes the payload inside the process]**
 * MapView (NtMapViewOfSection):
   * NtCreateSection: Creates new section that is shared between the process.
   * NtMapViewOfSection: Create a local section view.
