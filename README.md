@@ -19,3 +19,12 @@
   * GetThreadContext: Retrieve the current thread context.
   * SetThreadContext: Update instruction point for thread to shellcode.
   * ResumeThread: Resume the hijacked thread.
+
+**[MapView process injection, shares a section view with a target process then spawns new thread and executes the payload inside process]**
+* MapView (NtMapViewOfSection):
+  * NtCreateSection: Creates new section that is shared between the process.
+  * NtMapViewOfSection: Create a local section view.
+  * memcpy: Copy the paylod in the section.
+  * NtMapViewOfSection: Create remote section view.
+  * RtlCreateUserThread: Create a remote thread in the target process and point it to the mapped view in the target process to trigger the shellcode
+  
