@@ -5,6 +5,11 @@
 #include <string.h>
 #include <tlhelp32.h>
 
+typedef struct _CLIENT_ID {
+	HANDLE UniqueProcess;
+	HANDLE UniqueThread;
+} CLIENT_ID, *PCLIENT_ID;
+
 typedef FARPROC (WINAPI * RtlCreateUserThread_t)(
 	IN HANDLE ProcessHandle,
 	IN PSECURITY_DESCRIPTOR SecurityDescriptor OPTIONAL,
