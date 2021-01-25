@@ -8,6 +8,7 @@
   * NtCreateThreadEx/RtlCreateUserThread/CreateRemoteThread: starts a thread in the remote process with the start address of the shellcode.
 
 **[ThreadHijacking injection, targets an existing thread of a process and avoids any noisy process or thread creations operations. Bypasses some anti-virus solutions]**
+
 ***This technique often results in crashing the target process***
 * ThreadHijacking (SuspendThread):
   * SuspendThread: Suspend the thread we want to hijack.
