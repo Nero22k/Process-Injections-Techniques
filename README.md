@@ -28,3 +28,10 @@
   * NtMapViewOfSection: Create remote section view.
   * RtlCreateUserThread: Create a remote thread in the target process and point it to the mapped view in the target process to trigger the shellcode
   
+**[APC (Asynchronous Procedure Calls) queue code injection - Payload is executed when process enters into alertable state]**
+* APC Queue (QueueUserAPC):
+  * VirtualAllocEx: Allocate memory in the remote process.
+  * WriteProcessMemory: Write shellcode to the remote process.
+  * OpenProcess: Get a handle to a running process.
+  * QueueUserAPC: Adds async procedure call (APC) object to thread's APC queue
+  * CreateToolhelp32Snapshot: create a snapshot of target process threads.
